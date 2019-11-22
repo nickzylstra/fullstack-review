@@ -9,7 +9,7 @@ module.exports = {
         console.log(err);
         next();
       }
-      const repos = body;
+      const repos = JSON.parse(body);
       db.save(repos, (error, data) => {
         if (error) {
           console.log(error);

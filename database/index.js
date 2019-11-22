@@ -14,11 +14,7 @@ const Repo = mongoose.model('Repo', repoSchema);
 
 const save = (repos, next) => {
   debugger;
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
-
-  repos.forEach(({ id, owner, url, size }) => {
+  Promise.all(repos.map(({ id, owner, url, size }) => {
     const curRepo = new Repo({
       repoId: id,
       size,
@@ -26,7 +22,16 @@ const save = (repos, next) => {
       ownerLogin: owner.login,
       ownerId: owner.id,
     });
-  });
+
+    return curRepo.save();
+  }))
+    .then((data) => {
+      debugger;
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 module.exports.save = save;
