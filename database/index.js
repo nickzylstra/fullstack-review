@@ -13,7 +13,6 @@ const repoSchema = mongoose.Schema({
 const Repo = mongoose.model('Repo', repoSchema);
 
 const save = (repos, next) => {
-  debugger;
   Promise.all(repos.map(({ id, owner, url, size }) => {
     const curRepo = new Repo({
       repoId: id,
@@ -22,11 +21,9 @@ const save = (repos, next) => {
       ownerLogin: owner.login,
       ownerId: owner.id,
     });
-
-    return curRepo.save();
+    return Repo.findOneAndUpdate({ repoId: id }, curRepo, { upsert: true });
   }))
     .then((data) => {
-      debugger;
       next();
     })
     .catch((err) => {

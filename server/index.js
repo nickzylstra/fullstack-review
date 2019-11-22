@@ -4,7 +4,7 @@ const controllers = require('./controllers');
 const app = express();
 
 app.use(express.static(`${__dirname}/../client/dist`));
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 app.post('/repos', (req, res) => {
   const query = req.body.q;
