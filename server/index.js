@@ -4,10 +4,12 @@ const controllers = require('./controllers');
 const app = express();
 
 app.use(express.static(`${__dirname}/../client/dist`));
+app.use(express.urlencoded());
 
 app.post('/repos', (req, res) => {
-  console.log(req.body);
-  controllers.addUser('nickzylstra', () => {
+  const query = req.body.q;
+  console.log(`'${query}' was submitted to /repos POST`);
+  controllers.addUser(query, () => {
     // TODO - your code here!
     res.end();
   });

@@ -14,12 +14,11 @@ class App extends React.Component {
   }
 
   search(term) {
-    const sanTerm = JSON.stringify(term);
-    console.log(`${sanTerm} was searched`);
+    console.log(`${term} was searched`);
     $.ajax({
       url: '/repos',
       method: 'POST',
-      data: { q: sanTerm },
+      data: { q: term },
       success: (data) => {
         // TODO
       },
