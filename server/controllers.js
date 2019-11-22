@@ -1,9 +1,9 @@
 const db = require('../database/index');
-const { getReposByUserName } = require('../helpers/github');
+const { getReposByUsername } = require('../helpers/github');
 
 module.exports = {
-  addUser: (userName) => {
-    getReposByUserName(userName, (err, data) => {
+  addUser: (username, next) => {
+    getReposByUsername(username, (err, data) => {
       debugger;
       db.save(data);
     });

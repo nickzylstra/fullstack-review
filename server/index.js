@@ -7,9 +7,11 @@ app.use(express.static(`${__dirname}/../client/dist`));
 
 app.post('/repos', (req, res) => {
   console.log(req.body);
-  controllers.addUser('nickzylstra');
+  controllers.addUser('nickzylstra', () => {
+    // TODO - your code here!
+    res.end();
+  });
 
-  // TODO - your code here!
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database

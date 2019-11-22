@@ -19,7 +19,7 @@ class App extends React.Component {
     $.ajax({
       url: '/repos',
       method: 'POST',
-      data: sanTerm,
+      data: { q: sanTerm },
       success: (data) => {
         // TODO
       },
