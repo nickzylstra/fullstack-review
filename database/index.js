@@ -6,7 +6,8 @@ const repoSchema = mongoose.Schema({
   repoId: Number,
   views: Number,
   url: String,
-  user: String,
+  ownerLogin: String,
+  ownerId: Number,
 });
 
 const Repo = mongoose.model('Repo', repoSchema);
