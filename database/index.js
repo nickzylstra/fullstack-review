@@ -35,7 +35,23 @@ const save = (repos, next) => {
     })
     .catch((err) => {
       console.log(err);
+      next(err);
     });
 };
 
-module.exports.save = save;
+const getTop25 = (username, next) => {
+  // UPDATE to filter, generalize without username
+  Repo.find({ ownerLogin: username })
+    .then((repos) => {
+      next(null, repos);
+    })
+    .catch((err) => {
+      console.log(err);
+      next(err);
+    });
+};
+
+module.exports = {
+  save,
+  getTop25,
+};

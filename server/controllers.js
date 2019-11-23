@@ -7,15 +7,27 @@ module.exports = {
     getReposByUsername(username, (err, { body }) => {
       if (err) {
         console.log(err);
-        next();
+        next(err);
+      } else {
+        const repos = JSON.parse(body);
+        db.save(repos, (error, updatedCount) => {
+          if (error) {
+            console.log(error);
+            next(err);
+          }
+          next(null, updatedCount);
+        });
       }
-      const repos = JSON.parse(body);
-      db.save(repos, (error, updatedCount) => {
-        if (error) {
-          console.log(error);
-        }
-        next(null, updatedCount);
-      });
+    });
+  },
+  getTop25: (username, next) => {
+    db.getTop25(username, (err, repos) => {
+      if (err) {
+        console.log(err);
+        next(err);
+      } else {
+        next(null, repos);
+      }
     });
   },
 };
