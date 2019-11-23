@@ -13,17 +13,23 @@ const repoSchema = mongoose.Schema({
 const Repo = mongoose.model('Repo', repoSchema);
 
 const save = (repos, next) => {
-  Promise.all(repos.map(({ id, owner, url, size }) => {
-    const curRepo = new Repo({
-      repoId: id,
-      size,
-      url,
-      ownerLogin: owner.login,
-      ownerId: owner.id,
-    });
-    return Repo.findOneAndUpdate({ repoId: id }, curRepo, { upsert: true });
-  }))
-    .then((data) => {
+  Promise.all(repos.map(
+    ({
+      id, owner, url, size,
+    }) => {
+      const curRepo = {
+        repoId: id,
+        size,
+        url,
+        ownerLogin: owner.login,
+        ownerId: owner.id,
+      };
+      return Repo.findOneAndUpdate(curRepo, { upsert: true, new: true });
+    },
+  ))
+    .then((updatedRepos) => {
+      const updatedCount = updatedRepos.length;
+      console.log(`updated or added ${updatedCount} repos to db`);
       next();
     })
     .catch((err) => {
