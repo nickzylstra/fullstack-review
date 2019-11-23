@@ -14,6 +14,13 @@ const RepoList = ({ repos }) => (
       repos.
     </div>
     <table>
+      <thead>
+        <tr>
+          <td>Size</td>
+          <td>Owner</td>
+          <td>URL</td>
+        </tr>
+      </thead>
       <Repos repos={repos} />
     </table>
   </div>
