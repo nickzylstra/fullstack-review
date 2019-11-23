@@ -13,6 +13,26 @@ class App extends React.Component {
 
   }
 
+  componentDidMount() {
+    this.getTop25();
+  }
+
+  getTop25(username) {
+    $.ajax({
+      url:'/repos',
+      data: { q: username },
+      success: (repos) => {
+        console.log(`${repos.length} repos retrieved for ${username}`);
+        this.setState({
+          repos,
+        })
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
   search(term) {
     console.log(`${term} was searched`);
     $.ajax({
