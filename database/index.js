@@ -1,10 +1,14 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/fetcher');
+mongoose.connect('mongodb://localhost/fetcher')
+  .catch((err) => console.log(err));
+mongoose.connection.on('error', (err) => console.log(err));
+mongoose.set('debug', true);
 
 const repoSchema = mongoose.Schema({
   repoId: Number,
+  name: String,
   size: Number,
   url: String,
   ownerLogin: String,
@@ -16,10 +20,11 @@ const Repo = mongoose.model('Repo', repoSchema);
 const save = (repos, next) => {
   Promise.all(repos.map(
     ({
-      id, owner, url, size,
+      id, name, owner, url, size,
     }) => {
       const curRepo = {
         repoId: id,
+        name,
         size,
         url,
         ownerLogin: owner.login,

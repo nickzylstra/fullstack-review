@@ -5,11 +5,12 @@ const Repos = ({ repos }) => (
   <tbody>
     {repos.map((repo) => {
       const {
-        repoId, size, url, ownerLogin,
+        repoId, name, size, url, ownerLogin,
       } = repo;
       return (
         <tr key={repoId}>
           <td>{size}</td>
+          <td>{name}</td>
           <td>{ownerLogin}</td>
           <td>{url}</td>
         </tr>
