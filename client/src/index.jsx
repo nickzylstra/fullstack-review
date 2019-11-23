@@ -45,6 +45,7 @@ class App extends React.Component {
       data: { q: term },
       success: (updatedCount) => {
         console.log(`${updatedCount} repos added or updated`);
+        this.getTop25();
       },
       error: (err) => {
         console.log(err);
