@@ -21,7 +21,8 @@ class App extends React.Component {
     $.ajax({
       url:'/repos',
       data: { q: username },
-      success: (repos) => {
+      success: (body) => {
+        const repos = JSON.parse(body);
         console.log(`${repos.length} repos retrieved for ${username}`);
         this.setState({
           repos,
