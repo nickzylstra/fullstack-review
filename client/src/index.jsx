@@ -11,6 +11,7 @@ class App extends React.Component {
       repos: []
     }
 
+    this.getTop25 = this.getTop25.bind(this);
   }
 
   componentDidMount() {
@@ -53,8 +54,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Github Fetcher</h1>
-        <RepoList repos={this.state.repos} />
         <Search onSearch={this.search.bind(this)} />
+        <RepoList repos={this.state.repos} />
       </div>)
   }
 }
