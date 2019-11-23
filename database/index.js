@@ -1,10 +1,13 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/fetcher')
+mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true })
+  .then(() => {
+    console.log('connected to db');
+  })
   .catch((err) => console.log(err));
 mongoose.connection.on('error', (err) => console.log(err));
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 
 const repoSchema = mongoose.Schema({
   repoId: Number,
@@ -16,6 +19,21 @@ const repoSchema = mongoose.Schema({
 });
 
 const Repo = mongoose.model('Repo', repoSchema);
+const test = new Repo({
+  repoId: 12414,
+  name: 'test',
+  size: 11,
+  url: 'http://www.test.com',
+  ownerLogin: 'test',
+  ownerId: 1423,
+});
+
+test.save().then(() => {
+  console.log('inserted test');
+})
+  .catch((err) => {
+    console.log(err);
+  });
 
 const save = (repos, next) => {
   Promise.all(repos.map(
@@ -30,7 +48,7 @@ const save = (repos, next) => {
         ownerLogin: owner.login,
         ownerId: owner.id,
       };
-      return Repo.findOneAndUpdate(curRepo, { upsert: true, new: true });
+      return Repo.findOneAndUpdate({ repoId: id }, curRepo, { upsert: true, new: true }).exec();
     },
   ))
     .then((updatedRepos) => {
