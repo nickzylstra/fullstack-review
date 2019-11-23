@@ -8,10 +8,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      repos: []
-    }
+      repos: [],
+    };
 
     this.getTop25 = this.getTop25.bind(this);
+    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
@@ -20,21 +21,22 @@ class App extends React.Component {
 
   getTop25(username) {
     $.ajax({
-      url:'/repos',
+      url: '/repos',
       data: { q: username },
       success: (body) => {
         const repos = JSON.parse(body);
         console.log(`${repos.length} repos retrieved for ${username}`);
         this.setState({
           repos,
-        })
+        });
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   search(term) {
     console.log(`${term} was searched`);
     $.ajax({
@@ -42,7 +44,7 @@ class App extends React.Component {
       method: 'POST',
       data: { q: term },
       success: (updatedCount) => {
-        console.log(`${updatedCount} repos added or updated`)
+        console.log(`${updatedCount} repos added or updated`);
       },
       error: (err) => {
         console.log(err);
@@ -51,12 +53,14 @@ class App extends React.Component {
   }
 
   render() {
+    const { repos } = this.state;
     return (
       <div>
         <h1>Github Fetcher</h1>
-        <Search onSearch={this.search.bind(this)} />
-        <RepoList repos={this.state.repos} />
-      </div>)
+        <Search onSearch={this.search} />
+        <RepoList repos={repos} />
+      </div>
+    );
   }
 }
 

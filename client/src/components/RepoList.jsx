@@ -7,11 +7,11 @@ const RepoList = ({ repos }) => (
   <div>
     <h4> Repo List Component </h4>
     <div>
-      There are
+      Here are the top
       {' '}
       {repos.length}
       {' '}
-      repos.
+      repos by size:
     </div>
     <table>
       <thead>
