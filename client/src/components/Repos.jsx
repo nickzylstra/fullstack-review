@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-// import Repo from './Repo.jsx';
 
 const Repos = ({ repos }) => (
   <tbody>
