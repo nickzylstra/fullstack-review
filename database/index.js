@@ -1,7 +1,11 @@
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true })
+// const DBURL = 'mongodb://localhost/fetcher';
+const pw = process.env.DBPW;
+const DBURL = `mongodb://heroku_1n88hpr3:${pw}@ds121105.mlab.com:21105/heroku_1n88hpr3`;
+
+mongoose.connect(DBURL, { useNewUrlParser: true })
   .then(() => {
     console.log('connected to db');
   })
