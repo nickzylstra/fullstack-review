@@ -19,21 +19,21 @@ const repoSchema = mongoose.Schema({
 });
 
 const Repo = mongoose.model('Repo', repoSchema);
-const test = new Repo({
-  repoId: 12414,
-  name: 'test',
-  size: 11,
-  url: 'http://www.test.com',
-  ownerLogin: 'test',
-  ownerId: 1423,
-});
+// const test = new Repo({
+//   repoId: 12414,
+//   name: 'test',
+//   size: 11,
+//   url: 'http://www.test.com',
+//   ownerLogin: 'test',
+//   ownerId: 1423,
+// });
 
-test.save().then(() => {
-  console.log('inserted test');
-})
-  .catch((err) => {
-    console.log(err);
-  });
+// test.save().then(() => {
+//   console.log('inserted test');
+// })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 const save = (repos, next) => {
   Promise.all(repos.map(
