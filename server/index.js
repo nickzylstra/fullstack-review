@@ -9,9 +9,9 @@ app.use(express.urlencoded({ extended: true }));
 app.post('/repos', (req, res) => {
   const query = req.body.q;
   console.log(`'${query}' was submitted to /repos POST`);
-  controllers.addUser(query, () => {
+  controllers.addUser(query, (err, updatedCount) => {
     // TODO - your code here!
-    res.end();
+    res.status(201).end(JSON.stringify(updatedCount));
   });
 
   // This route should take the github username provided

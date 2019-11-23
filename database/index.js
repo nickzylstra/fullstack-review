@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/fetcher');
@@ -30,7 +31,7 @@ const save = (repos, next) => {
     .then((updatedRepos) => {
       const updatedCount = updatedRepos.length;
       console.log(`updated or added ${updatedCount} repos to db`);
-      next();
+      next(null, updatedCount);
     })
     .catch((err) => {
       console.log(err);

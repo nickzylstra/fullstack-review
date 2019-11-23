@@ -10,12 +10,11 @@ module.exports = {
         next();
       }
       const repos = JSON.parse(body);
-      db.save(repos, (error, data) => {
+      db.save(repos, (error, updatedCount) => {
         if (error) {
           console.log(error);
         }
-        // TODO update below
-        next(data);
+        next(null, updatedCount);
       });
     });
   },

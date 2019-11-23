@@ -19,8 +19,8 @@ class App extends React.Component {
       url: '/repos',
       method: 'POST',
       data: { q: term },
-      success: (data) => {
-        // TODO
+      success: (updatedCount) => {
+        console.log(`${updatedCount} repos added or updated`)
       },
       error: (err) => {
         console.log(err);
