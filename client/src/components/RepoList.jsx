@@ -17,8 +17,8 @@ const RepoList = ({ repos }) => (
       <thead>
         <tr>
           <td>Size</td>
+          <td>Name</td>
           <td>Owner</td>
-          <td>URL</td>
         </tr>
       </thead>
       <Repos repos={repos} />

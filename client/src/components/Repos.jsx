@@ -10,9 +10,8 @@ const Repos = ({ repos }) => (
       return (
         <tr key={repoId}>
           <td>{size}</td>
-          <td>{name}</td>
+          <td><a href={url}>{name}</a></td>
           <td>{ownerLogin}</td>
-          <td>{url}</td>
         </tr>
       );
     })}

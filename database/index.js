@@ -38,13 +38,14 @@ const Repo = mongoose.model('Repo', repoSchema);
 const save = (repos, next) => {
   Promise.all(repos.map(
     ({
-      id, name, owner, url, size,
+      // eslint-disable-next-line camelcase
+      id, name, owner, svn_url, size,
     }) => {
       const curRepo = {
         repoId: id,
         name,
         size,
-        url,
+        url: svn_url,
         ownerLogin: owner.login,
         ownerId: owner.id,
       };
