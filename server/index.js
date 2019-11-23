@@ -27,7 +27,6 @@ app.get('/repos', (req, res) => {
   const username = req.body.q || 'nickzylstra';
   controllers.getTop25(username, (err, repos) => {
     console.log(`serving top 25 repos for ${username}`);
-    debugger;
     res.end(JSON.stringify(repos));
   });
 });

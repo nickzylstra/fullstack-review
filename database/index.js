@@ -41,7 +41,7 @@ const save = (repos, next) => {
 
 const getTop25 = (username, next) => {
   // UPDATE to filter, generalize without username
-  Repo.find({ ownerLogin: username })
+  Repo.find({ ownerLogin: username }).sort({ size: -1 }).limit(5)
     .then((repos) => {
       next(null, repos);
     })
